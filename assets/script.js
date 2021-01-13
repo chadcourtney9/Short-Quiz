@@ -11,6 +11,5 @@ $(".submit").on("click", function () {
     $(location).attr('href', questions)
 });
 
-function startGame() {
-}
+
 
