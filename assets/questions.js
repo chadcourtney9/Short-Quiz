@@ -1,15 +1,16 @@
 const countdown = document.getElementById('countdown');
 let timeLeft = 120;
 let countdownId;
-const answerButtons = $("answerButtons")
+const answerButtons = $("answerButtons");
 
 // <h5>What is the correct syntax for referring to an external script called "xxx.js"?
 //                         <!--1 <script href="xxx.js" 2. <script src="xxx.js"> 3. <script name="xxx.js"-->
-//                         <h5></h5>
-//                         <!--1. the head section 2. the body section 3. both the head and body section are correct-->
+//                  
+const qHeader = ".questionHeader";
 
 const myQuestions = [
     {
+        title: "Question 1:",
         question: "Inside which HTML element do we put the JavaScript?",
         answers: {
             a: "<script>",
@@ -20,6 +21,7 @@ const myQuestions = [
         correctAnswer: "c"
     },
     {
+        title: "Question 2:",
         question: "How can you add a comment in a JavaScript?",
         answers: {
             a: "'this is a comment",
@@ -29,6 +31,7 @@ const myQuestions = [
         correctAnswer: "c"
     },
     {
+        title: "Question 3:",
         question: "Where is the correct place to insert a JavaScript?",
         answers: {
             a: "The <head> section",
@@ -57,7 +60,7 @@ function startCountdown() {
         }
         updateTimer();
     }, 1000)
-}
+};
 
 function updateTimer() {
     let mins = Math.floor(timeLeft / 60);
@@ -68,9 +71,24 @@ function updateTimer() {
 updateTimer()
 countdownId = startCountdown()
 
-function gameEnd() {
+//pseudo code
 
-    if (userFinish) {
-        clearInterval(countdownId)
+// set / push question/answer objects[] 
+function qGen() {
+};
+
+function nextQBTN() {
+    $(".btn").on("click", function () {
     }
-}
+    )
+};
+//just placeholder idea for time reduction on wrong answer
+function wrongReduce() {
+    (timeLeft - (15 + seconds))
+};
+
+//set local storage for highscore
+
+// set highscores on said page
+
+// not important work on progress bar
