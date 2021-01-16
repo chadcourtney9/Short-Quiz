@@ -5,10 +5,10 @@ $(document).ready(function () {
     const $answerButtons = $(".page-item");
     var currentIndex = 0;
     const $questionHeader = $(".questionHeader");
-    // const progressBar = document.getElementsByClassName('.progress-bar');
     const $mainPg = "./index.html";
     const $highscorePg = "./highscores.html";
-    // const localStorageKey;
+    const $score = $(".score")
+    // const localStorageKey    // const progressBar = document.getElementsByClassName('.progress-bar');
 
     const myQuestions = [
         {
@@ -50,7 +50,7 @@ $(document).ready(function () {
                 "ESLint"
             ],
             correctAnswer: "4"
-        }
+        },
     ];
 
     function startCountdown() {
@@ -79,10 +79,15 @@ $(document).ready(function () {
     function qGenerator() {
         var currentQ = myQuestions[currentIndex];
         $answerButtons.each(function (i, li) {
+            if (currentIndex >= 4) {
+                localStorage.setItem("score", timeLeft)
+                return $(location).attr('href', $highscorePg);
+            }
             const $li = $(li)
             $li.find("a").text(currentQ.answers[i])
         });
-        $questionHeader.text(currentQ.question);
+        $questionHeader.text(currentQ.question)
+
     };
 
     $answerButtons.on("click", function () {
@@ -92,20 +97,9 @@ $(document).ready(function () {
         qGenerator();
     });
 
-    // validate user choice to correct answer
-    function gameOver() {
-        var currentQ = myQuestions[currentIndex];
-        if (currentQ >= myQuestions.length) {
-            $(location).attr('href', $highscorePg)
-            alert("Well Done!");
-        }
-    };
-
-
     qGenerator();
-    gameOver();
 
-    //set local storage for highscore
+
 
     // set highscores on said page
 
