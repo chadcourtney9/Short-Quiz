@@ -3,11 +3,10 @@ let timeLeft = 120;
 let countdownId;
 const answerButtons = $(".page-item");
 var currentIndex = 0;
-
-// <h5>What is the correct syntax for referring to an external script called "xxx.js"?
-//                         <!--1 <script href="xxx.js" 2. <script src="xxx.js"> 3. <script name="xxx.js"-->
-//                  
 const questionHeader = $(".questionHeader");
+const progressBar = document.getElementsByClassName('.progress-bar');
+const mainPg = "./index.html";
+
 
 const myQuestions = [
     {
@@ -19,7 +18,7 @@ const myQuestions = [
             "<scripting>",
             "<js>"
         ],
-        correctAnswer: "c"
+        correctAnswer: "<script>"
     },
     {
         title: "Question 2:",
@@ -28,9 +27,9 @@ const myQuestions = [
             "'this is a comment",
             "//this is a comment",
             "<!--this is a comment-->",
-            "gergerg"
+            "/* this is a comment"
         ],
-        correctAnswer: "c"
+        correctAnswer: "//this is a comment"
     },
     {
         title: "Question 3:",
@@ -41,25 +40,27 @@ const myQuestions = [
             "The <html> section",
             "Both the <head> and <body> are correct"
         ],
-        correctAnswer: "d"
+        correctAnswer: "Both the <head> and <body> are correct"
     },
-    // question: "Which tool can you use to ensure code quality?",
-    // answers: {
-    //     a: "Angular",
-    //     b: "jQuery",
-    //     c: "RequireJS",
-    //     d: "ESLint"
-    // },
-    // correctAnswer: "d"
-];
-
-
+    {
+        title: "Questions 4:",
+        question: "Which tool can you use to ensure code quality?",
+        answers: [
+            "Angular",
+            "jQuery",
+            "RequireJS",
+            "ESLint"
+        ],
+        correctAnswer: "ESLint"
+    }];
 
 function startCountdown() {
     return setInterval(function () {
         timeLeft--;
-        if (timeLeft < 1) {
+        if (timeLeft < 0) {
             clearInterval(countdownId)
+            $(location).attr('href', mainPg)
+            alert(" TIME OUT!");
         }
         updateTimer();
     }, 1000)
@@ -74,34 +75,42 @@ function updateTimer() {
 updateTimer()
 countdownId = startCountdown()
 
-//pseudo code $ infront to know jquery obj
+
 // last  q bring to create highscore. deduct 25 seconds per wrong answer.
-// set / push question/answer objects[] 
+// set / push question/answer
 function qGenerator() {
     var currentQ = myQuestions[currentIndex];
-    console.log(answerButtons);
     answerButtons.each(function (i, li) {
         const $li = $(li)
-        // console.log(currentQ.answers[i])
-        console.log($li)
         $li.find("a").text(currentQ.answers[i])
     });
     questionHeader.text(currentQ.question);
-
+    // if (answer.correctAnswer) {
+    //     $li.addEventListener("click", selectAnswer)
+    // };
 };
 
-answerButtons.on("click", function () {
+answerButtons.on("click", function (li) {
+    // const $value = $(this).data("value");
+    var currentQ = myQuestions[currentIndex];
+    const $li = $(li)
+    if ($li === myQuestions.correctAnswer) alert("well done");
+
+    // else {
+    //     (startCountdown - 45000)
+    // }
+
     currentIndex++;
     qGenerator();
 });
 
-//just placeholder idea for time reduction on wrong answer
-function wrongReduce() {
-    (timeLeft - (15 + seconds))
-};
+qGenerator();
 
 //set local storage for highscore
-qGenerator();
+
 // set highscores on said page
 
 // not important work on progress bar
+
+
+//note from tutor session pseudo code $ infront to know jquery obj
