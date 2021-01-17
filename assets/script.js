@@ -6,10 +6,7 @@ let countdownId;
 // prepend a number to timer. add event listener to startCountdown on click
 //startQuiz.
 
-
+// brings user to questions page
 $(".submit").on("click", function () {
     $(location).attr('href', questions)
 });
-
-
-

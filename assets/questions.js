@@ -7,9 +7,12 @@ $(document).ready(function () {
     const $questionHeader = $(".questionHeader");
     const $mainPg = "./index.html";
     const $highscorePg = "./highscores.html";
+    var hScores = [];
+    var newScore;
+    var fScore;
     const $score = $(".score")
-    // const localStorageKey    // const progressBar = document.getElementsByClassName('.progress-bar');
 
+    // questions answers and correct answers.
     const myQuestions = [
         {
             question: "Inside which HTML element do we put the JavaScript?",
@@ -52,7 +55,7 @@ $(document).ready(function () {
             correctAnswer: "4"
         },
     ];
-
+    // start the timer on the right side of the page
     function startCountdown() {
         return setInterval(function () {
             timeLeft--;
@@ -64,32 +67,35 @@ $(document).ready(function () {
             updateTimer();
         }, 1000)
     };
-
+    // does visuals for the timer
     function updateTimer() {
+        // this is in case I add more questions I can add time and have minutes set
         let mins = Math.floor(timeLeft / 60);
         let seconds = timeLeft % 60;
+        // adds 0 integer to 0:01
         if (seconds < 10) { seconds = "0" + seconds; }
+        // inserts the timer into the element text
         countdown.textContent = mins + ":" + seconds;
     }
     updateTimer()
     countdownId = startCountdown()
 
-    // last  q bring to create highscore. deduct 25 seconds per wrong answer.
-    // set / push question/answer
+    // generates the question and answers, inserting them into the proper element
     function qGenerator() {
         var currentQ = myQuestions[currentIndex];
+
         $answerButtons.each(function (i, li) {
             if (currentIndex >= 4) {
-                localStorage.setItem("score", timeLeft)
+                hScores = localStorage.setItem("score", JSON.stringify(timeLeft))
                 return $(location).attr('href', $highscorePg);
-            }
+            };
             const $li = $(li)
             $li.find("a").text(currentQ.answers[i])
         });
         $questionHeader.text(currentQ.question)
 
     };
-
+    // validating answer to user input
     $answerButtons.on("click", function () {
         if (this.dataset.answer !== myQuestions[currentIndex].correctAnswer)
             timeLeft = timeLeft - 20;
@@ -98,12 +104,4 @@ $(document).ready(function () {
     });
 
     qGenerator();
-
-
-
-    // set highscores on said page
-
-    // not important work on progress bar
-
-    //note from tutor session pseudo code $ infront to know jquery obj
 })
