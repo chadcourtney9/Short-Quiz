@@ -7,11 +7,11 @@
 
 # Preview
 
-![img of preview]()
+![img of preview](https://github.com/chadcourtney9/Short-Quiz/blob/main/assets/images/Capture.PNG)
 
 # Lighthouse
 
-![img of lighthouse results]()
+![img of lighthouse results](https://github.com/chadcourtney9/Short-Quiz/blob/main/assets/images/lighthouse.PNG)
 
 ### Licenses 
 
